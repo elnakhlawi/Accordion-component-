@@ -1,0 +1,18 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.item:hover {
+  transform: translateY(-3px) scaleX(1.05);
+  cursor: pointer;
+  -webkit-transform: translateY(-3px) scaleX(1.05);
+  -moz-transform: translateY(-3px) scaleX(1.05);
+  -ms-transform: translateY(-3px) scaleX(1.05);
+  -o-transform: translateY(-3px) scaleX(1.05);
+}
+.open{
+  color:green;
+  border: 1px solid green !important;
+}
