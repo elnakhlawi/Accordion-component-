@@ -44,6 +44,7 @@ const data = [
 ];
 
 function App() {
+  const [cureOpen, setCureOpen] = useState(null);
   return (
     <>
       <div
@@ -74,7 +75,14 @@ function App() {
           {data.map((el, i) => {
             return (
               <div style={{}} key={el.id}>
-                <Item question={el.question} answer={el.answer} number={i} />
+                <Item
+                  question={el.question}
+                  number={i}
+                  cureOpen={cureOpen}
+                  setCureOpen={setCureOpen}
+                >
+                  {el.answer}
+                </Item>
               </div>
             );
           })}
@@ -84,17 +92,18 @@ function App() {
   );
 }
 
-function Item({ question, answer, number }) {
-  const [isOpen, setIsOpen] = useState(false);
-  function handleToggle(){
-    setIsOpen((isOpen) => !isOpen )
+function Item({ question, children, number, cureOpen, setCureOpen }) {
+  let isOpen = number == cureOpen;
+  function handleToggle() {
+    setCureOpen(isOpen ? null : number);
   }
   return (
     <div
-      className={`item ${isOpen?'open':''}`}
+      className={`item ${isOpen ? "open" : ""}`}
       style={{
-        width:'630px',
-        textWrap:'wrap',
+        width:'90%',
+        maxWidth: "630px",
+        textWrap: "wrap",
         backgroundColor: "white",
         marginBottom: "15px",
         borderRadius: "12px",
@@ -122,7 +131,7 @@ function Item({ question, answer, number }) {
           alignItems: "center",
         }}
       >
-        <span className="number" style={{ color: "#5d6d7e90" }}>
+        <span className="number" style={{ color: "#5d6d7e90",marginRight:'15px'}}>
           {number < 9 ? `0${number + 1}` : number + 1}
         </span>
         <p
@@ -132,7 +141,7 @@ function Item({ question, answer, number }) {
           {question}
         </p>
         <span className="simple" style={{ fontSize: "30px" }}>
-        {isOpen?"-":"+"}
+          {isOpen ? "-" : "+"}
         </span>
       </div>
       {isOpen && (
@@ -152,7 +161,7 @@ function Item({ question, answer, number }) {
               paddingTop: "10px",
             }}
           >
-            {answer}
+            {children}
           </p>
         </div>
       )}
